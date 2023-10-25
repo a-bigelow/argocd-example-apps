@@ -95,7 +95,7 @@ spec:
         kubernetes.io/arch: amd64
         kubernetes.io/os: linux
 ---
-apiVersion: extensions/v1beta1
+apiVersion: v1
 kind: Ingress
 metadata:
   name: hello-kubernetes-ingress
