@@ -101,8 +101,10 @@ metadata:
   name: hello-kubernetes-ingress
   namespace: hello-kubernetes
   annotations:
-    ingress.kubernetes.io/rewrite-target: /
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
 spec:
+  ingressClassName: alb
   rules:
   - http:
       paths:
