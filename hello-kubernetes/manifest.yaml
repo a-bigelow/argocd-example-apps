@@ -56,6 +56,13 @@ spec:
         app.kubernetes.io/instance: eks-ha
     spec:
       serviceAccountName: hello-kubernetes-eks-ha
+      volumes:
+      - name: secrets-store-inline
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: <CHANGE-ME>
       containers:
         - name: hello-kubernetes
           image: "paulbouwer/hello-kubernetes:1.10"
@@ -73,6 +80,11 @@ spec:
               path: /
               port: http
           env:
+          - name: MESSAGE
+            valueFrom:
+              secretKeyRef:
+                name: secret-message
+                key: message
           - name: HANDLER_PATH_PREFIX
             value: ""
           - name: RENDER_PATH_PREFIX
@@ -91,6 +103,10 @@ spec:
                 fieldPath: spec.nodeName
           - name: CONTAINER_IMAGE
             value: "paulbouwer/hello-kubernetes:1.10"
+          volumeMounts:
+            - name: secrets-store-inline
+              mountPath: /mnt/secrets-store
+              readOnly: true
       nodeSelector:
         kubernetes.io/arch: amd64
         kubernetes.io/os: linux
