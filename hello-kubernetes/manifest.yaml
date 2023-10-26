@@ -85,6 +85,8 @@ spec:
           #     secretKeyRef:
           #       name: secret-message
           #       key: message
+          - name: MESSAGE
+            value: "Hello, Balcony!"
           - name: HANDLER_PATH_PREFIX
             value: ""
           - name: RENDER_PATH_PREFIX
