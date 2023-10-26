@@ -44,7 +44,7 @@ metadata:
     app.kubernetes.io/instance: eks-ha
     app.kubernetes.io/version: "1.10"
 spec:
-  replicas: 2
+  replicas: 10
   selector:
     matchLabels:
       app.kubernetes.io/name: hello-kubernetes
